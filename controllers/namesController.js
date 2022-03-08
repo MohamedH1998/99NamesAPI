@@ -69,7 +69,6 @@ const getARandomName = async (req, res, next) => {
     try {
         const randomID = Math.floor((Math.random()*100));
         const name = await firestore.collection("Names").where("id", "==", parseInt(randomID))
-        console.log(randomID)
         const snapshot = await name.get()
         const data = snapshot.docs.map((docs) => docs.data())
         if (data.length === 0) {
