@@ -1,5 +1,5 @@
 const express = require("express")
-const { getAllNames, getSpecificName, getARandomName } = require("../controllers/namesController")
+const { getAllNames, getSpecificName, getARandomName, getRange } = require("../controllers/namesController")
 
 const router = express.Router();
 
@@ -9,6 +9,8 @@ router.get("/api/names", getAllNames)
 router.get("/api/name/random", getARandomName)
 // this call gets a specific name based on the idea - the names are in order so "0" would get the name Allah
 router.get("/api/name/:id", getSpecificName)
+// this will call the range of names specified by the user - a list chosen by user starting from range to other
+router.get("/api/names/range/:id,:id2", getRange)
 // these calls get a random name
 router.get("/", getARandomName)
 router.get("*", getARandomName)
