@@ -32,7 +32,7 @@ const getSpecificName = async (req, res, next) => {
         const id = req.params.id
         const name = await firestore.collection("Names").where("id", "==", parseInt(id))
         const snapshot = await name.get()
-        const data = snapshot.docs.map((docs) => docs.data())  
+        const data = snapshot.docs.map((docs) => docs.data())
         if (data.length === 0) {
             res.status(400).send("A name with that id does not seem to exist unfortunately")
         } else {
@@ -40,35 +40,14 @@ const getSpecificName = async (req, res, next) => {
         }
     }catch (e) {
         res.status(400).send(e.message)
+
     }
 }
-
-
-//gets a range of names from the data base
-const getRange = async (req, res, next) => {
-    try{
-        const id = req.params.id
-        const id2 = req.params.id2
-        const name = await firestore.collection("Names").where("id", ">=", parseInt(id)).where("id", "<=", parseInt(id2))
-        const snapshot = await name.get()
-        const data = snapshot.docs.map((docs) => docs.data())
-        if (Number(id) > Number(id2)){
-            res.status(400).send("Start id cannot be larger than end id")
-        }else if (data.length === 0) {
-            res.status(400).send("A name with that id does not seem to exist sadly")
-        } else {
-            res.send(data)
-        }
-    }catch (e) {
-        res.status(400).send(e.message)
-    }
-}
-
 
 const getARandomName = async (req, res, next) => {
     try {
-        const randomID = Math.floor((Math.random()*100));
-        const name = await firestore.collection("Names").where("id", "==", parseInt(randomID))
+        const randomNum = Math.floor((Math.random() * 100));
+        const name = await firestore.collection("Names").where("id", "==", parseInt(randomNum))
         const snapshot = await name.get()
         const data = snapshot.docs.map((docs) => docs.data())
         if (data.length === 0) {
@@ -81,10 +60,8 @@ const getARandomName = async (req, res, next) => {
 
     }
 }
-
 module.exports = {
     getAllNames,
     getSpecificName,
-    getARandomName,
-    getRange
+    getARandomName
 }
