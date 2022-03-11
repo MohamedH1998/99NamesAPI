@@ -22,10 +22,4 @@ router.get('/api/v1/name/:id', getSpecificName);
 // a list chosen by user starting from range to other
 router.get('/api/v1/names/range/:id,:id2', getRange);
 
-// these calls get a random name
-// not sure if these routes are needed
-// there is already a random name route.
-router.get('/', getRandomName);
-router.get('*', getRandomName);
-
 module.exports = router;

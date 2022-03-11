@@ -2,9 +2,11 @@ const firebase = require('../db');
 
 const firestore = firebase.firestore();
 
+// TODO: Add internal logger in catch blocks
+
 /**
  * gets all names from the database
- * @param {Request} req Request object
+ * @param {Request} _ Request object (un-used)
  * @param {Response} res Response object
  */
 const getAllNames = async (_, res) => {
@@ -12,9 +14,12 @@ const getAllNames = async (_, res) => {
     const names = await firestore.collection('Names').orderBy('id');
     const snapshot = await names.get();
     const list = snapshot.docs.map((docs) => docs.data());
-    res.send(list);
+    res.status(200).json(list);
   } catch (e) {
-    res.status(400).send('Something went wrong with retrieving all the names');
+    res.status(400).json({
+      message: 'Something went wrong with retrieving all the names',
+      status: 400,
+    });
   }
 };
 
@@ -32,14 +37,17 @@ const getSpecificName = async (req, res) => {
     const snapshot = await name.get();
     const data = snapshot.docs.map((docs) => docs.data());
     if (data.length === 0) {
-      res
-        .status(400)
-        .send('A name with that id does not seem to exist unfortunately');
+      res.status(404).json({
+        message: 'A name with that id does not seem to exist.',
+        status: 404,
+      });
     } else {
-      res.send(data);
+      res.status(200).json(data);
     }
   } catch (e) {
-    res.status(400).send(e.message);
+    res
+      .status(400)
+      .json({ message: 'Something seems to have gone wrong.', status: 400 });
   }
 };
 
@@ -50,9 +58,7 @@ const getSpecificName = async (req, res) => {
  */
 const getRange = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const { id2 } = req.params;
+    const { id, id2 } = req.params;
 
     const name = await firestore
       .collection('Names')
@@ -72,15 +78,16 @@ const getRange = async (req, res) => {
       );
     } else if (data.length === 0) {
       res.status(404).send().json({
-        message: 'A name with that id does not seem to exist.',
+        message: 'Names do not seem to exist within the given range of ids.',
         status: 404,
       });
     } else {
-      // format of response should be { name: 'english name', arabicName: 'arabic', status: 200 }
       res.status(200).json(data);
     }
   } catch (e) {
-    res.status(400).send(e.message);
+    res
+      .status(400)
+      .json({ message: 'Something seems to have gone wrong.', status: 400 });
   }
 };
 
@@ -107,10 +114,12 @@ const getRandomName = async (_, res) => {
         status: 404,
       });
     } else {
-      res.send(data);
+      res.status(200).json(data);
     }
   } catch (e) {
-    res.status(400).send(e.message);
+    res
+      .status(400)
+      .json({ message: 'Something seems to have gone wrong.', status: 400 });
   }
 };
 
