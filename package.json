@@ -15,7 +15,10 @@
   "description": "API to access the 99 names of Allah",
   "main": "index.js",
   "devDependencies": {
-    "@babel/helper-compilation-targets": "^7.16.7"
+    "@babel/helper-compilation-targets": "^7.16.7",
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
   },
   "scripts": {
     "start": "node index.js",
