@@ -18,11 +18,14 @@
     "@babel/helper-compilation-targets": "^7.16.7",
     "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4"
+    "eslint-plugin-import": "^2.25.4",
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest --watchAll"
   },
   "author": "Momito",
   "license": "ISC"

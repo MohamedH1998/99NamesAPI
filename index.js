@@ -17,4 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', rateLimiterUsingThirdParty, namesRoutes);
 
 // TODO: replace this with logger
-app.listen(PORT, () => console.log(`App is listening on ${PORT}`));
+const server = app.listen(PORT, () => console.log(`App is listening on ${PORT}`));
+
+module.exports = {
+  server,
+  app,
+};
