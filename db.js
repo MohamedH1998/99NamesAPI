@@ -1,7 +1,7 @@
-const firebase = require('firebase');
-const dotenv = require('dotenv');
+import firebase from 'firebase';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
 
 const {
   API_KEY,
@@ -27,4 +27,4 @@ const firebaseConfig = {
 
 const db = firebase.initializeApp(firebaseConfig);
 
-module.exports = db;
+export default db;

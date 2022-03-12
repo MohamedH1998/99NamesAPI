@@ -1,4 +1,4 @@
-const firebase = require('../db');
+import firebase from '../../db.js';
 
 const firestore = firebase.firestore();
 
@@ -9,7 +9,7 @@ const firestore = firebase.firestore();
  * @param {Request} _ Request object (un-used)
  * @param {Response} res Response object
  */
-const getAllNames = async (_, res) => {
+export const getAllNames = async (_, res) => {
   try {
     const names = await firestore.collection('Names').orderBy('id');
     const snapshot = await names.get();
@@ -28,7 +28,7 @@ const getAllNames = async (_, res) => {
  * @param {Request} req Request object
  * @param {Response} res Response object
  */
-const getSpecificName = async (req, res) => {
+export const getSpecificName = async (req, res) => {
   try {
     const { id } = req.params;
     const name = await firestore
@@ -56,7 +56,7 @@ const getSpecificName = async (req, res) => {
  * @param {Request} req Request object
  * @param {Response} res Response object
  */
-const getRange = async (req, res) => {
+export const getRange = async (req, res) => {
   try {
     const { id, id2 } = req.params;
 
@@ -96,7 +96,7 @@ const getRange = async (req, res) => {
  * @param {Request} _ request object (un-used)
  * @param {Response} res response object
  */
-const getRandomName = async (_, res) => {
+export const getRandomName = async (_, res) => {
   try {
     const randomId = Math.floor(Math.random() * 100);
 
@@ -121,11 +121,4 @@ const getRandomName = async (_, res) => {
       .status(400)
       .json({ message: 'Something seems to have gone wrong.', status: 400 });
   }
-};
-
-module.exports = {
-  getAllNames,
-  getSpecificName,
-  getRandomName,
-  getRange,
 };
