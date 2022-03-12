@@ -26,7 +26,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --watchAll"
+    "test": "jest --detectOpenHandles --watchAll"
   },
   "author": "Momito",
   "license": "ISC"

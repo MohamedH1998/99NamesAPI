@@ -28,6 +28,7 @@ describe('Names API', () => {
 
   it('GET /api/v1/names/777 --> 404 not found', async () => {
     const response = await request(app).get('/api/v1/names/777');
+    expect(response.body).toEqual({});
     expect(response.status).toEqual(404);
   });
 });
