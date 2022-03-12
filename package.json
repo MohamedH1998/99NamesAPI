@@ -26,7 +26,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --detectOpenHandles --watchAll"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --watchAll"
   },
   "author": "Momito",
   "license": "ISC"

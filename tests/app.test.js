@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
-const request = require('supertest');
-const { app, server } = require('..');
+import request from 'supertest';
+import app from '../src/app.js';
 
 afterEach(() => {
-  server.close();
+  // server.close();
 });
 
 describe('Names API', () => {
