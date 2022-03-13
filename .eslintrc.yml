@@ -6,4 +6,8 @@ extends:
   - airbnb-base
 parserOptions:
   ecmaVersion: latest
-rules: {}
+rules: {
+  "import/extensions": ["error", {
+    "js": "always"
+  }]
+}

@@ -1,12 +1,13 @@
-const express = require('express');
-const {
+import { Router } from 'express';
+
+import {
   getAllNames,
   getSpecificName,
   getRandomName,
   getRange,
-} = require('../controllers/namesController');
+} from '../controllers/namesController.js';
 
-const router = express.Router();
+const router = Router();
 
 // this call gets all the 99 names
 router.get('/api/v1/names', getAllNames);
@@ -22,4 +23,4 @@ router.get('/api/v1/name/:id', getSpecificName);
 // a list chosen by user starting from range to other
 router.get('/api/v1/names/range/:id,:id2', getRange);
 
-module.exports = router;
+export default router;
