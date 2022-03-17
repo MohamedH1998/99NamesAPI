@@ -51,7 +51,7 @@ export const getSpecificName = async (req, res) => {
     } else {
       res.status(200).json(data);
     }
-  } catch (e) {
+  }catch (e) {
     res
       .status(400)
       .json({ message: 'Something seems to have gone wrong.', status: 400 });
@@ -63,21 +63,19 @@ export const getSpecificName = async (req, res) => {
  * @param {Request} req Request object
  * @param {Response} res Response object
  */
-export const getRange = async (req, res) => {
+ export const getRange = async (req, res) => {
   try {
     const { id, id2 } = req.params;
 
     const data = await getNamesInRange(id, id2);
 
     if (Number(id) > Number(id2)) {
-      res.status(400).json(
-        JSON.stringify({
+      res.status(400).json({
           message: 'Start id cannot be larger than end id.',
           status: 400,
-        }),
-      );
+        });
     } else if (data.length === 0) {
-      res.status(404).send().json({
+      res.status(404).json({
         message: 'Names do not seem to exist within the given range of ids.',
         status: 404,
       });
