@@ -8,7 +8,6 @@ import createLogger from '../utils/logger.js';
 
 const logger = createLogger('names-service-controller');
 
-// TODO: Add internal logger in catch blocks
 
 /**
  * gets all names from the database
@@ -76,7 +75,7 @@ export const getSpecificName = async (req, res) => {
  * @param {Request} req Request object
  * @param {Response} res Response object
  */
-export const getRange = async (req, res) => {
+ export const getRange = async (req, res) => {
   try {
     const { id, id2 } = req.params;
 
@@ -89,8 +88,7 @@ export const getRange = async (req, res) => {
         JSON.stringify({
           message: 'Start id cannot be larger than end id.',
           status: 400,
-        }),
-      );
+        });
     } else if (data.length === 0) {
       logger.error('could not find names within the given range');
       res.status(404).send().json({
